@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app.models import Slider,Sub_category,Category,Main_category
-from app.models import Section,Product,Product_Image,Additional_Information,Color
+from app.models import Section,Product,Product_Image,Additional_Information,Color,Order
 # Register your models here.
 
 
@@ -41,3 +41,9 @@ admin.site.register(Section)
 admin.site.register(Product,Product_Admin)
 admin.site.register(Product_Image)
 admin.site.register(Additional_Information)
+
+
+
+
+
+admin.site.register(Order)

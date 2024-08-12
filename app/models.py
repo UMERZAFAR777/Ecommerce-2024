@@ -121,3 +121,39 @@ class Additional_Information(models.Model):
 
 
 
+class Order(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    
+    address = models.CharField(max_length=255)
+   
+    city = models.CharField(max_length=100)
+    
+    postal_code = models.CharField(max_length=20)
+    
+    email = models.EmailField()
+    phone = models.IntegerField(max_length=20)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    packing_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    tax = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+
+
+    def __str__(self):
+        return f"Order {self.id} by {self.first_name} {self.last_name}"
+
+
+
+
+
+
+
+
+
+

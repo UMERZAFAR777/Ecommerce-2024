@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from app.models import Slider,Main_category,Product,Category,Color
+from app.models import Slider,Main_category,Product,Category,Color,Order
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
@@ -279,5 +279,67 @@ def cart_detail(request):
 
 
 def checkout(request):
-    return render (request,'checkout.html')
+    cart = request.session.get('cart', {})
+    
+    # Calculate the costs
+    packing_cost = sum(item.get('packing_cost', 0) for item in cart.values())
+    tax = sum(item.get('tax', 0) for item in cart.values())
+    cart_total_amount = sum(item.get('price', 0) * item.get('quantity', 1) for item in cart.values())
+
+    # Calculate delivery charges
+    delivery_charges = 0 if cart_total_amount > 500 else 60
+
+    # Calculate order total
+    order_total = cart_total_amount + packing_cost + tax + delivery_charges
+
+    if request.method == "POST":
+        # Get billing information from the form
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        city = request.POST.get('city')
+        postal_code = request.POST.get('postal_code')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+
+        # Save the order with the calculated totals
+        order = Order(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone=phone,
+            city=city,
+            postal_code=postal_code,
+            address=address,
+            subtotal=cart_total_amount,
+            packing_cost=packing_cost,
+            tax=tax,
+            order_total=order_total
+        )
+        order.save()
+
+        return redirect('order_success')
+
+    # Prepare data to be sent to the template
+    data = {
+        'cart_total_amount': cart_total_amount,
+        'packing_cost': packing_cost,
+        'tax': tax,
+        'delivery_charges': delivery_charges,
+        'order_total': order_total,
+    }
+
+    return render(request, 'checkout.html', data)
+
+
+
+def order_success(request):
+    return render (request,'order_success.html')
+
+
+
+
+
+
+
 

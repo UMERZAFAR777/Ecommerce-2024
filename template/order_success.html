@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">  
+<h1>Thank you for your order!</h1>
+    <p>Your order has been placed successfully.</p>
+    <br>
+    
+    <button style="border: 10px;"><a href="{% url 'home' %}">Back Home </a></button>
+</div>  
+
+{% endblock %}
