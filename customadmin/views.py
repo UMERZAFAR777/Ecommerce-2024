@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from app.models import Order,Product
 
-
+from django.db.models import Sum
 
 
 
@@ -71,7 +71,7 @@ def dashboard(request):
     
 
 
-
+    total_sales = Order.objects.aggregate(total_sales=Sum('order_total'))['total_sales'] or 0
 
     user = User.objects.all()
     order = Order.objects.all()
@@ -81,6 +81,7 @@ def dashboard(request):
         'user':user,
         'order':order,
         'product':product,
+        'total_sales':total_sales,
     }
 
 
