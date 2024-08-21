@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'cart',
+    'customadmin',
     
 ]
 CART_SESSION_ID = 'cart'
