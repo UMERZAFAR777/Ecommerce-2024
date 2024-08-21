@@ -1,9 +1,17 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from app.models import Order
+
+
+
+
+
+
+
 
 def admin_login(request):
     try:
@@ -60,11 +68,30 @@ def dashboard(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
         messages.error(request, 'You must be an admin to view this page.')
         return redirect(reverse('admin_login'))
-    return render(request, 'custom/dashboard.html')
+    
 
 
 
 
+    user = User.objects.all()
+    order = Order.objects.all()
+
+    
+    data = {
+        'user':user,
+        'order':order,
+    }
+
+
+    return render(request, 'custom/dashboard.html',data)
+
+
+
+def logout_admin(request):
+    logout(request,)
+    messages.success(request,'Logged Out......!')
+
+    return redirect ('home')
 
 
 

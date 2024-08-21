@@ -215,11 +215,12 @@
                         class="avatar-img rounded-circle"
                       />
                     </div>
-                    
+                   
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="fw-bold">UMER ZAFAR</span>
                     </span>
+                   
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
@@ -232,26 +233,19 @@
                               class="avatar-img rounded"
                             />
                           </div>
+                          
+                          
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
-                            <a
-                              href="/static/profie.html"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >View Profile</a
-                            >
+                            <h4>UMER ZAFAR</h4>
+                            <p class="text-muted">umerzafar433@gmail.com</p>
+                            
                           </div>
+                         
                         </div>
                       </li>
                       <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/static/#">MyProfile</a>
-                        <a class="dropdown-item" href="/static/#">MyBalance</a>
-                        <a class="dropdown-item" href="/static/#">Inox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/static/#">Acount Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/static/#">Loout</a>
+                       
+                        <a class="dropdown-item" href="{% url 'logout_admin' %}">Logout</a>
                       </li>
                     </div>
                   </ul>
@@ -457,6 +451,12 @@
                       </div>
                     </div>
                     <div class="card-list py-4">
+
+
+
+                        {% for i in user %}
+
+
                       <div class="item-list">
                         <div class="avatar">
                           <img
@@ -466,8 +466,8 @@
                           />
                         </div>
                         <div class="info-user ms-3">
-                          <div class="username">Jimmy Denis</div>
-                          <div class="status">Graphic Designer</div>
+                          <div class="username">{{i.username}}</div>
+                          
                         </div>
                         <button class="btn btn-icon btn-link op-8 me-1">
                           <i class="far fa-envelope"></i>
@@ -476,98 +476,16 @@
                           <i class="fas fa-ban"></i>
                         </button>
                       </div>
-                      <div class="item-list">
-                        <div class="avatar">
-                          <span
-                            class="avatar-title rounded-circle border border-white"
-                            >CF</span
-                          >
-                        </div>
-                        <div class="info-user ms-3">
-                          <div class="username">Chandra Felix</div>
-                          <div class="status">Sales Promotion</div>
-                        </div>
-                        <button class="btn btn-icon btn-link op-8 me-1">
-                          <i class="far fa-envelope"></i>
-                        </button>
-                        <button class="btn btn-icon btn-link btn-danger op-8">
-                          <i class="fas fa-ban"></i>
-                        </button>
-                      </div>
-                      <div class="item-list">
-                        <div class="avatar">
-                          <img
-                            src="/static/asset/img/talha.jpg"
-                            alt="..."
-                            class="avatar-img rounded-circle"
-                          />
-                        </div>
-                        <div class="info-user ms-3">
-                          <div class="username">Talha</div>
-                          <div class="status">Front End Designer</div>
-                        </div>
-                        <button class="btn btn-icon btn-link op-8 me-1">
-                          <i class="far fa-envelope"></i>
-                        </button>
-                        <button class="btn btn-icon btn-link btn-danger op-8">
-                          <i class="fas fa-ban"></i>
-                        </button>
-                      </div>
-                      <div class="item-list">
-                        <div class="avatar">
-                          <img
-                            src="/static/asset/img/chadengle.jpg"
-                            alt="..."
-                            class="avatar-img rounded-circle"
-                          />
-                        </div>
-                        <div class="info-user ms-3">
-                          <div class="username">Chad</div>
-                          <div class="status">CEO Zeleaf</div>
-                        </div>
-                        <button class="btn btn-icon btn-link op-8 me-1">
-                          <i class="far fa-envelope"></i>
-                        </button>
-                        <button class="btn btn-icon btn-link btn-danger op-8">
-                          <i class="fas fa-ban"></i>
-                        </button>
-                      </div>
-                      <div class="item-list">
-                        <div class="avatar">
-                          <span
-                            class="avatar-title rounded-circle border border-white bg-primary"
-                            >H</span
-                          >
-                        </div>
-                        <div class="info-user ms-3">
-                          <div class="username">Hizrian</div>
-                          <div class="status">Web Designer</div>
-                        </div>
-                        <button class="btn btn-icon btn-link op-8 me-1">
-                          <i class="far fa-envelope"></i>
-                        </button>
-                        <button class="btn btn-icon btn-link btn-danger op-8">
-                          <i class="fas fa-ban"></i>
-                        </button>
-                      </div>
-                      <div class="item-list">
-                        <div class="avatar">
-                          <span
-                            class="avatar-title rounded-circle border border-white bg-secondary"
-                            >F</span
-                          >
-                        </div>
-                        <div class="info-user ms-3">
-                          <div class="username">Farrah</div>
-                          <div class="status">Marketing</div>
-                        </div>
-                        <button class="btn btn-icon btn-link op-8 me-1">
-                          <i class="far fa-envelope"></i>
-                        </button>
-                        <button class="btn btn-icon btn-link btn-danger op-8">
-                          <i class="fas fa-ban"></i>
-                        </button>
-                      </div>
+
+
+
+                      {% endfor %}
+
+
+
+
+                      
+                     
                     </div>
                   </div>
                 </div>
@@ -616,6 +534,14 @@
                           </tr>
                         </thead>
                         <tbody>
+
+
+
+
+                            {% for i in order %}
+
+
+
                           <tr>
                             <th scope="row">
                               <button
@@ -623,104 +549,23 @@
                               >
                                 <i class="fa fa-check"></i>
                               </button>
-                              Payment from #10231
+                              {{i.first_name}}-{{i.last_name}}
                             </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">{{i.created_at}}</td>
+                            <td class="text-end">${{i.order_total}}</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
                           </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              Payment from #10231
-                            </th>
-                            <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
-                          </tr>
+
+
+
+
+                          {% endfor %}
+
+
+
+                          
                         </tbody>
                       </table>
                     </div>
