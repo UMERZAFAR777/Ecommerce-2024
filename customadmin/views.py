@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login,logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Order
+from app.models import Order,Product
 
 
 
@@ -76,10 +76,11 @@ def dashboard(request):
     user = User.objects.all()
     order = Order.objects.all()
 
-    
+    product = Product.objects.all()
     data = {
         'user':user,
         'order':order,
+        'product':product,
     }
 
 
@@ -92,6 +93,36 @@ def logout_admin(request):
     messages.success(request,'Logged Out......!')
 
     return redirect ('home')
+
+
+
+def product_admin(request):
+    product = Product.objects.all()
+    data = {
+        'product':product,
+    }
+    return render (request,'custom/product.html',data)
+
+
+
+def user_admin(request):
+    user = User.objects.all()
+    data = {
+        'user':user,
+    }
+    return render (request,'custom/user.html',data)
+
+
+def group_admin(request):
+    group = Group.objects.all()
+    data = {
+        'group':group,
+    }
+    return render (request,'custom/group.html',data)
+
+
+
+
 
 
 
