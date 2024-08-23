@@ -505,29 +505,30 @@
 
 
 
-                            {% for i in order %}
-
-
-
+                          {% for i in order %}
                           <tr>
-                            <th scope="row">
-                              <button
-                                class="btn btn-icon btn-round btn-success btn-sm me-2"
-                              >
-                                <i class="fa fa-check"></i>
-                              </button>
-                              {{i.first_name}}-{{i.last_name}}
-                            </th>
-                            <td class="text-end">{{i.created_at}}</td>
-                            <td class="text-end">${{i.order_total}}</td>
-                            <td class="text-end">
-                              <span class="badge badge-success">Completed</span>
-                            </td>
+                              <th scope="row">
+                                  <button
+                                      class="btn btn-icon btn-round btn-success btn-sm me-2"
+                                  >
+                                      <i class="fa fa-check"></i>
+                                  </button>
+                                  {{i.first_name}}-{{i.last_name}}
+                              </th>
+                              <td class="text-end">{{i.created_at}}</td>
+                              <td class="text-end">${{i.order_total}}</td>
+                              <td class="text-end">
+                                  <form method="post" action="{% url 'update_order_status' i.id %}">
+                                      {% csrf_token %}
+                                      <select name="status" class="form-select">
+                                          <option value="None" {% if i.status == 'None' %}selected{% endif %}>None</option>
+                                          <option value="Pending" {% if i.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                          <option value="Complete" {% if i.status == 'Complete' %}selected{% endif %}>Complete</option>
+                                      </select>
+                                      <button type="submit" class="btn btn-primary mt-2">Update & Send Email</button>
+                                  </form>
+                              </td>
                           </tr>
-
-
-
-
                           {% endfor %}
 
 

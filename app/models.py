@@ -122,9 +122,14 @@ class Additional_Information(models.Model):
 
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('None', 'None'),
+        ('Pending', 'Pending'),
+        ('Complete', 'Complete'),
+    ]
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='None')
     address = models.CharField(max_length=255)
    
     city = models.CharField(max_length=100)

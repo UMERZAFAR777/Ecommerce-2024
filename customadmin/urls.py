@@ -10,6 +10,7 @@ urlpatterns = [
     path('product/',views.product_admin,name='product_admin'),
     path('user/',views.user_admin,name='user_admin'),
     path('group/',views.group_admin,name='group_admin'),
+    path('update_order_status/<int:order_id>/', update_order_status, name='update_order_status'),
 
 ]
 

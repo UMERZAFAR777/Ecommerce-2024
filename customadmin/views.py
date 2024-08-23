@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User,Group
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -16,7 +17,7 @@ from django.db.models import Sum
 def admin_login(request):
     try:
         if request.user.is_authenticated:
-            return redirect('/dashboard/')
+            return redirect('/admin/dashboard/')
         
         if request.method == "POST":
             username = request.POST.get('username')
@@ -33,7 +34,7 @@ def admin_login(request):
             
             if user is not None and user.is_superuser:
                 login(request, user)
-                return redirect('/dashboard/')
+                return redirect('/admin/dashboard/')
             else:
                 if user is None:
                     messages.error(request, 'Invalid username or password.')
@@ -60,10 +61,10 @@ def dashboard(request):
 
 
 
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.urls import reverse
-
+@user_passes_test(lambda u: u.is_superuser)
 def dashboard(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
         messages.error(request, 'You must be an admin to view this page.')
@@ -123,7 +124,72 @@ def group_admin(request):
 
 
 
+from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
 
+
+# def update_order_status(request, order_id):
+#     order = get_object_or_404(Order, id=order_id)
+#     new_status = request.POST.get('status')
+    
+#     if new_status:
+#         order.status = new_status
+#         order.save()
+
+#         # Sending email based on the status
+#         if new_status == 'Pending':
+#             subject = "Order Delayed"
+#             message = "Your package is delayed due to some reason."
+#         elif new_status == 'Complete':
+#             subject = "Order Shipped"
+#             message = "Now your package is transferred."
+
+#         if new_status in ['Pending', 'Complete']:
+#             send_mail(subject, message, 'umerzafar433@gmail.com', [order.email])
+#             messages.success(request, f"Email sent to {order.email} regarding the status '{new_status}'.")
+
+#     return redirect('/dashboard/')
+
+
+
+
+from django.core.mail import send_mail, BadHeaderError
+
+
+def update_order_status(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    new_status = request.POST.get('status')
+    
+    if new_status:
+        order.status = new_status
+        order.save()
+
+        if new_status == 'Pending':
+            subject = "Order Delayed"
+            message = "Your package is delayed due to some reason."
+        elif new_status == 'Complete':
+            subject = "Order Shipped"
+            message = "Now your package is transferred."
+
+        if new_status in ['Pending', 'Complete']:
+            try:
+                send_mail(subject, message, 'umerzafar433@gmail.com', [order.email])
+                messages.success(request, f"Email sent to {order.email} regarding the status '{new_status}'.")
+                print("Email sent successfully")
+            except BadHeaderError:
+                print("Bad Header Error - Invalid header found.")
+                return HttpResponse('Invalid header found.')
+            except Exception as e:
+                print(f"Error sending email: {e}")
+                messages.error(request, "There was an error sending the email. Please try again later.")
+                return HttpResponse(f"There was an error sending the email: {e}")
+        else:
+            print("No email sent as the status was neither 'Pending' nor 'Complete'.")
+    else:
+        print("No status provided.")
+
+    return redirect('/admin/dashboard/')
 
 

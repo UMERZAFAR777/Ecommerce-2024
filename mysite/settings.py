@@ -63,6 +63,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'EMAIL_BACKEND' = 'django.core.mail.backends.console.EmailBackend',
         'DIRS': [BASE_DIR / 'template'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -204,12 +205,16 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'umerzafar433@gmail.com'
+# EMAIL_HOST_PASSWORD = 'wpbbxbwxtbxujszh'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'umerzafar433@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-
-
-
+EMAIL_HOST_PASSWORD = 'wpbbxbwxtbxujszh'  # App Password
 
